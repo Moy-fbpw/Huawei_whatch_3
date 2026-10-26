@@ -123,6 +123,5 @@
 <g transform="rotate(304.00 233.0 233.0)" filter="url(#sombra)"><path d="M233.00,115.00 L229.00,120.00 L229.00,251.00 L233.00,251.00 Z" fill="url(#metalOscuro)" stroke="#5f646c" stroke-width=".5"/><path d="M233.00,115.00 L237.00,120.00 L237.00,251.00 L233.00,251.00 Z" fill="url(#metalClaro)" stroke="#5f646c" stroke-width=".5"/></g>
 <g transform="rotate(51.60 233.0 233.0)" filter="url(#sombra)"><path d="M233.00,33.00 L230.00,38.00 L230.00,255.00 L233.00,255.00 Z" fill="url(#metalOscuro)" stroke="#5f646c" stroke-width=".5"/><path d="M233.00,33.00 L236.00,38.00 L236.00,255.00 L233.00,255.00 Z" fill="url(#metalClaro)" stroke="#5f646c" stroke-width=".5"/></g>
 <g transform="rotate(216.00 233.0 233.0)" filter="url(#sombra)"><rect x="232.3" y="23.0" width="1.4" height="248" fill="#eef2f7"/></g>
-<circle cx="233.0" cy="233.0" r="6.5" fill="url(#metalV)" stroke="#5f646c" stroke-width=".5"/>
-<circle cx="233.0" cy="233.0" r="2.4" fill="#eef2f7"/>
+<circle cx="233.0" cy="233.0" r="6.5" fill="url(#metalV)" stroke="#5f646c" stroke-width=".5"/><circle cx="233.0" cy="233.0" r="2.4" fill="#eef2f7"/>
 </svg>

@@ -134,6 +134,5 @@
 <g transform="rotate(304.00 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,115.0 Q220.91,174.0 230.582,229.0 L233.0,251.0 Z" fill="url(#metalOscuro)" stroke="#08090b" stroke-width=".5"/><path d="M233.0,115.0 Q245.09,174.0 235.418,229.0 L233.0,251.0 Z" fill="url(#metalClaro)" stroke="#08090b" stroke-width=".5"/></g>
 <g transform="rotate(51.60 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 Q223.7,133.0 231.14,229.0 L233.0,255.0 Z" fill="url(#metalOscuro)" stroke="#08090b" stroke-width=".5"/><path d="M233.0,33.0 Q242.3,133.0 234.86,229.0 L233.0,255.0 Z" fill="url(#metalClaro)" stroke="#08090b" stroke-width=".5"/></g>
 <g transform="rotate(216.00 233.0 233.0)" filter="url(#sombra)"><rect x="232.3" y="23.0" width="1.4" height="248" fill="#1c1a16"/><rect x="230.4" y="251.0" width="5.2" height="20" rx="2.6" fill="#1c1a16"/></g>
-<circle cx="233.0" cy="233.0" r="6.5" fill="url(#metalV)" stroke="#08090b" stroke-width=".5"/>
-<circle cx="233.0" cy="233.0" r="2.4" fill="#1c1a16"/>
+<circle cx="233.0" cy="233.0" r="6.5" fill="url(#metalV)" stroke="#08090b" stroke-width=".5"/><circle cx="233.0" cy="233.0" r="2.4" fill="#1c1a16"/>
 </svg>

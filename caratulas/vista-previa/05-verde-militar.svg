@@ -125,6 +125,5 @@
 <g transform="rotate(304.00 233.0 233.0)" filter="url(#sombra)"><path d="M233.00,115.00 L227.00,209.40 L229.70,233.00 L231.20,251.00 L233.00,251.00 Z" fill="url(#metalOscuro)" stroke="#5e4c25" stroke-width=".5"/><path d="M233.00,115.00 L239.00,209.40 L236.30,233.00 L234.80,251.00 L233.00,251.00 Z" fill="url(#metalClaro)" stroke="#5e4c25" stroke-width=".5"/><line x1="233.0" y1="219.0" x2="233.0" y2="168.10" stroke="#efe6c8" stroke-width="2.16" stroke-linecap="round"/></g>
 <g transform="rotate(51.60 233.0 233.0)" filter="url(#sombra)"><path d="M233.00,33.00 L228.50,193.00 L230.53,233.00 L231.65,255.00 L233.00,255.00 Z" fill="url(#metalOscuro)" stroke="#5e4c25" stroke-width=".5"/><path d="M233.00,33.00 L237.50,193.00 L235.47,233.00 L234.35,255.00 L233.00,255.00 Z" fill="url(#metalClaro)" stroke="#5e4c25" stroke-width=".5"/><line x1="233.0" y1="219.0" x2="233.0" y2="123.00" stroke="#efe6c8" stroke-width="1.62" stroke-linecap="round"/></g>
 <g transform="rotate(216.00 233.0 233.0)" filter="url(#sombra)"><rect x="232.3" y="23.0" width="1.4" height="248" fill="#d2ae5c"/></g>
-<circle cx="233.0" cy="233.0" r="6.5" fill="url(#metalV)" stroke="#5e4c25" stroke-width=".5"/>
-<circle cx="233.0" cy="233.0" r="2.4" fill="#d2ae5c"/>
+<circle cx="233.0" cy="233.0" r="6.5" fill="url(#metalV)" stroke="#5e4c25" stroke-width=".5"/><circle cx="233.0" cy="233.0" r="2.4" fill="#d2ae5c"/>
 </svg>

@@ -83,7 +83,7 @@ def polar(radio, grados):
     return C + radio * math.cos(a), C + radio * math.sin(a)
 
 
-def defs(p):
+def defs(p, sombra=(1.5, 2.5)):
     m1, m2, m3 = p["metal"]
     f1, f2 = p["fondo"]
     return f"""<defs>
@@ -112,7 +112,7 @@ def defs(p):
     <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .22 0"/>
   </filter>
   <filter id="sombra" x="-50%" y="-50%" width="200%" height="200%">
-    <feDropShadow dx="1.5" dy="2.5" stdDeviation="1.6" flood-color="#000" flood-opacity=".38"/>
+    <feDropShadow dx="{sombra[0]}" dy="{sombra[1]}" stdDeviation="1.6" flood-color="#000" flood-opacity=".38"/>
   </filter>
 </defs>"""
 
@@ -231,30 +231,40 @@ def capa_fondo(p):
                       textura(p), pista(p), indices(p), numeros(p)])
 
 
+def marco_fecha(p):
+    """Ventana de fecha a las 3 (parte fija del fondo)."""
+    claro = sum(int(p["fondo"][0][i:i + 2], 16) for i in (1, 3, 5)) > 450
+    ventana = "#ffffff" if claro else "#000000"
+    return f"""<g filter="url(#sombra)">
+  <rect x="{C + 138}" y="{C - 11}" width="56" height="22" rx="2.5" fill="{ventana}" fill-opacity="{.75 if claro else .45}"
+        stroke="url(#metalV)" stroke-width="1.6"/>
+</g>"""
+
+
+def icono_bateria(p, bateria, x=C - 22, y=330):
+    tinta = p["tinta"]
+    nivel = 11 * bateria / 100
+    return f"""<g transform="translate({x} {y})" opacity=".75">
+  <rect x="0" y="0" width="14" height="7" rx="1.3" fill="none" stroke="{tinta}" stroke-width=".9"/>
+  <rect x="14.3" y="2" width="1.4" height="3" fill="{tinta}"/>
+  <rect x="1.5" y="1.5" width="{nivel:.1f}" height="4" fill="{tinta}"/>
+</g>"""
+
+
 def capa_datos(p, dia, fecha, h, m, bateria):
     """Datos discretos: día bajo las 12, fecha en ventana a las 3, hora digital y batería sobre las 6."""
     tinta = p["tinta"]
     sufijo = "am" if h < 12 else "pm"
     h12 = h % 12 or 12
-    nivel = 11 * bateria / 100
-    claro = sum(int(p["fondo"][0][i:i + 2], 16) for i in (1, 3, 5)) > 450
-    ventana = "#ffffff" if claro else "#000000"
     return f"""
 <text x="{C}" y="132" font-family="{p['fuente_dia']}" font-size="14" letter-spacing="3.5" text-anchor="middle"
       fill="{tinta}" opacity=".9">{dia}</text>
-<g filter="url(#sombra)">
-  <rect x="{C + 138}" y="{C - 11}" width="56" height="22" rx="2.5" fill="{ventana}" fill-opacity="{.75 if claro else .45}"
-        stroke="url(#metalV)" stroke-width="1.6"/>
-</g>
+{marco_fecha(p)}
 <text x="{C + 166}" y="{C + 1}" font-family="Avenir Next" font-weight="500" font-size="13" text-anchor="middle"
       dominant-baseline="central" fill="{tinta}">{fecha}</text>
 <text x="{C}" y="318" font-family="Avenir Next" font-weight="500" font-size="13" letter-spacing=".5"
       text-anchor="middle" fill="{tinta}" opacity=".8">{h12}:{m:02d} {sufijo}</text>
-<g transform="translate({C - 22} 330)" opacity=".75">
-  <rect x="0" y="0" width="14" height="7" rx="1.3" fill="none" stroke="{tinta}" stroke-width=".9"/>
-  <rect x="14.3" y="2" width="1.4" height="3" fill="{tinta}"/>
-  <rect x="1.5" y="1.5" width="{nivel:.1f}" height="4" fill="{tinta}"/>
-</g>
+{icono_bateria(p, bateria)}
 <text x="{C + 10}" y="337" font-family="Avenir Next" font-weight="500" font-size="11" text-anchor="middle"
       fill="{tinta}" opacity=".75">{bateria}%</text>"""
 
@@ -308,21 +318,34 @@ def segundero(p, angulo):
     return (f'<g transform="rotate({angulo:.2f} {C} {C})" filter="url(#sombra)">{"".join(partes)}</g>')
 
 
+ANCHOS = {"delfina": (13, 10), "hoja": (13, 10), "alfa": (12, 9), "aguja": (6, 4.6), "baston": (8, 6)}
+
+
+def horario(p, angulo):
+    return manecilla(p["manecillas"], 118, ANCHOS[p["manecillas"]][0], 18, angulo, p)
+
+
+def minutero(p, angulo):
+    return manecilla(p["manecillas"], 200, ANCHOS[p["manecillas"]][1], 22, angulo, p)
+
+
 def capa_manecillas(p, h, m, s):
-    tipo = p["manecillas"]
-    ancho_h, ancho_m = {"delfina": (13, 10), "hoja": (13, 10), "alfa": (12, 9), "aguja": (6, 4.6), "baston": (8, 6)}[tipo]
     return "\n".join([
-        manecilla(tipo, 118, ancho_h, 18, (h % 12 + m / 60) * 30, p),
-        manecilla(tipo, 200, ancho_m, 22, (m + s / 60) * 6, p),
+        horario(p, (h % 12 + m / 60) * 30),
+        minutero(p, (m + s / 60) * 6),
         segundero(p, s * 6),
-        f'<circle cx="{C}" cy="{C}" r="6.5" fill="url(#metalV)" stroke="{p["metal"][2]}" stroke-width=".5"/>',
-        f'<circle cx="{C}" cy="{C}" r="2.4" fill="{p["segundero"]}"/>',
+        centro(p),
     ])
 
 
-def svg(cuerpo, p):
+def centro(p):
+    return (f'<circle cx="{C}" cy="{C}" r="6.5" fill="url(#metalV)" stroke="{p["metal"][2]}" stroke-width=".5"/>'
+            f'<circle cx="{C}" cy="{C}" r="2.4" fill="{p["segundero"]}"/>')
+
+
+def svg(cuerpo, p, sombra=(1.5, 2.5)):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{TAM}" height="{TAM}" '
-            f'viewBox="0 0 {TAM} {TAM}">\n{defs(p)}\n{cuerpo}\n</svg>\n')
+            f'viewBox="0 0 {TAM} {TAM}">\n{defs(p, sombra)}\n{cuerpo}\n</svg>\n')
 
 
 def caratula(p):
@@ -332,12 +355,11 @@ def caratula(p):
                           capa_manecillas(p, t["h"], t["m"], t["s"])]), p)
 
 
-def aod():
-    """AOD única: fondo negro, marcas gris plata, dos manecillas, fecha y una mini hora digital.
+AOD_GRIS, AOD_PLATA, AOD_SOMBRA = "#7d8086", "#c3c6cb", "#5b5e63"
 
-    Sin segundero ni texturas: sólo se encienden las marcas, las agujas y dos textos.
-    """
-    gris, plata, sombra = "#7d8086", "#c3c6cb", "#5b5e63"
+
+def aod_fondo():
+    """Marcas del AOD: minutos finos y cuñas en las horas, doble a las 12."""
     partes = [f'<circle cx="{C}" cy="{C}" r="{C}" fill="#000"/>']
     for i in range(60):
         ang = i * 6
@@ -345,25 +367,42 @@ def aod():
             x1, y1 = polar(214, ang)
             x2, y2 = polar(220, ang)
             partes.append(f'<line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" '
-                          f'stroke="{gris}" stroke-width="1.4" stroke-linecap="round"/>')
+                          f'stroke="{AOD_GRIS}" stroke-width="1.4" stroke-linecap="round"/>')
             continue
         hora = i // 5
         largo, ext = (22, 3.2) if hora % 3 == 0 else (15, 2.4)
         for d in ((-4.2, 4.2) if hora == 0 else (0,)):
             partes.append(f'<path transform="rotate({ang} {C} {C})" d="M{C + d - ext},{C - 222} '
                           f'L{C + d + ext},{C - 222} L{C + d + ext * .45},{C - 222 + largo} '
-                          f'L{C + d - ext * .45},{C - 222 + largo} Z" fill="{plata}"/>')
+                          f'L{C + d - ext * .45},{C - 222 + largo} Z" fill="{AOD_PLATA}"/>')
+    return "\n".join(partes)
+
+
+def aod_manecilla(largo, ancho, angulo):
+    puntos = mitades("delfina", largo, ancho, 16)
+    return (f'<g transform="rotate({angulo:.2f} {C} {C})">'
+            f'<path d="{ruta(puntos, espejo=True)}" fill="{AOD_SOMBRA}"/>'
+            f'<path d="{ruta(puntos)}" fill="{AOD_PLATA}"/></g>')
+
+
+def aod_centro():
+    return f'<circle cx="{C}" cy="{C}" r="5" fill="#000" stroke="{AOD_PLATA}" stroke-width="1.6"/>'
+
+
+def aod():
+    """AOD única: fondo negro, marcas gris plata, dos manecillas, fecha y una mini hora digital.
+
+    Sin segundero ni texturas: sólo se encienden las marcas, las agujas y dos textos.
+    """
     t = MUESTRA
-    partes.append(f'<text x="{C}" y="152" font-family="Avenir Next" font-weight="500" font-size="15" '
-                  f'letter-spacing="1.5" text-anchor="middle" fill="{gris}">{t["fecha"]}   {t["dia"]}</text>')
-    partes.append(f'<text x="{C}" y="322" font-family="Avenir Next" font-weight="500" font-size="15" '
-                  f'letter-spacing="1" text-anchor="middle" fill="{gris}">{t["h"]}:{t["m"]:02d}</text>')
-    for largo, ancho, ang in ((118, 12, (t["h"] % 12 + t["m"] / 60) * 30), (200, 9, t["m"] * 6)):
-        puntos = mitades("delfina", largo, ancho, 16)
-        partes.append(f'<g transform="rotate({ang:.2f} {C} {C})">'
-                      f'<path d="{ruta(puntos, espejo=True)}" fill="{sombra}"/>'
-                      f'<path d="{ruta(puntos)}" fill="{plata}"/></g>')
-    partes.append(f'<circle cx="{C}" cy="{C}" r="5" fill="#000" stroke="{plata}" stroke-width="1.6"/>')
+    partes = [aod_fondo(),
+              f'<text x="{C}" y="152" font-family="Avenir Next" font-weight="500" font-size="15" '
+              f'letter-spacing="1.5" text-anchor="middle" fill="{AOD_GRIS}">{t["fecha"]}   {t["dia"]}</text>',
+              f'<text x="{C}" y="322" font-family="Avenir Next" font-weight="500" font-size="15" '
+              f'letter-spacing="1" text-anchor="middle" fill="{AOD_GRIS}">{t["h"]}:{t["m"]:02d}</text>',
+              aod_manecilla(118, 12, (t["h"] % 12 + t["m"] / 60) * 30),
+              aod_manecilla(200, 9, t["m"] * 6),
+              aod_centro()]
     return svg("\n".join(partes), dict(ESTILOS[0]))
 
 
