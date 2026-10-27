@@ -308,46 +308,46 @@
       "alto": 9
     },
     "dias/1-lunes.png": {
-      "x": 201,
-      "y": 227,
-      "ancho": 59,
-      "alto": 12
+      "x": 177,
+      "y": 224,
+      "ancho": 112,
+      "alto": 15
     },
     "dias/2-martes.png": {
-      "x": 194,
-      "y": 227,
-      "ancho": 74,
-      "alto": 12
+      "x": 177,
+      "y": 224,
+      "ancho": 112,
+      "alto": 15
     },
     "dias/3-miércoles.png": {
       "x": 177,
-      "y": 225,
-      "ancho": 108,
-      "alto": 14
+      "y": 224,
+      "ancho": 112,
+      "alto": 15
     },
     "dias/4-jueves.png": {
-      "x": 197,
-      "y": 227,
-      "ancho": 68,
-      "alto": 12
+      "x": 177,
+      "y": 224,
+      "ancho": 112,
+      "alto": 15
     },
     "dias/5-viernes.png": {
-      "x": 191,
-      "y": 227,
-      "ancho": 80,
-      "alto": 12
+      "x": 177,
+      "y": 224,
+      "ancho": 112,
+      "alto": 15
     },
     "dias/6-sábado.png": {
-      "x": 194,
+      "x": 177,
       "y": 224,
-      "ancho": 75,
+      "ancho": 112,
       "alto": 15
     },
     "dias/7-domingo.png": {
-      "x": 187,
-      "y": 227,
-      "ancho": 89,
-      "alto": 12
+      "x": 177,
+      "y": 224,
+      "ancho": 112,
+      "alto": 15
     }
   },
   "ubicaciones": {

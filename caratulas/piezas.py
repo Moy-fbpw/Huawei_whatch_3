@@ -9,6 +9,7 @@ Uso: .venv/bin/python piezas.py
 
 import json
 import shutil
+import sys
 import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -35,10 +36,10 @@ AOD_TEXTOS = {
 }
 
 
-def texto(car, fuente, peso, tam, espaciado, opacidad, color):
-    """Un carácter o palabra centrado en el centro del lienzo."""
+def texto(car, fuente, peso, tam, espaciado, opacidad, color, ancla="middle"):
+    """Un carácter o palabra en el centro del lienzo (centrado, o empezando ahí con ancla="start")."""
     return (f'<text x="{C}" y="{C}" font-family="{fuente}" font-weight="{peso}" font-size="{tam}" '
-            f'letter-spacing="{espaciado}" text-anchor="middle" dominant-baseline="central" '
+            f'letter-spacing="{espaciado}" text-anchor="{ancla}" dominant-baseline="central" '
             f'fill="{color}" opacity="{opacidad}">{car}</text>')
 
 
@@ -68,7 +69,7 @@ class Lote:
         cajas = {}
         # Los grupos (dígitos de un mismo tipo) comparten tamaño para alinearse en Theme Studio.
         for (ruta, _, recorte), im in zip(self.piezas, imagenes):
-            if recorte.startswith("grupo:"):
+            if recorte.startswith(("grupo:", "izq:")):
                 caja = im.getbbox()
                 if caja:
                     a = cajas.setdefault(recorte, [C, C, C, C])
@@ -85,6 +86,9 @@ class Lote:
                 aire = int(aire[0]) if aire else 0
                 propia, grupo = im.getbbox(), cajas["grupo:" + nombre]
                 caja = (propia[0] - aire, grupo[1], propia[2] + aire, grupo[3])
+            elif recorte.startswith("izq:"):
+                # Grupo alineado a la izquierda: misma caja para todos, sin centrar.
+                caja = tuple(int(v) for v in cajas[recorte])
             elif recorte.startswith("grupo:"):
                 x0, y0, x1, y1 = cajas[recorte]
                 medio = max(C - x0, x1 - C)  # Simétrico respecto al centro para no descuadrar.
@@ -95,6 +99,17 @@ class Lote:
             destino.parent.mkdir(parents=True, exist_ok=True)
             im.crop(caja).save(destino)
             guia[ruta] = dict(x=caja[0], y=caja[1], ancho=caja[2] - caja[0], alto=caja[3] - caja[1])
+
+        # Theme Studio pide, en cada número armado con dígitos, una imagen transparente del tamaño de un dígito.
+        for grupo in ("hora", "fecha", "bateria"):
+            if f"{grupo}/0.png" in guia:
+                info = guia[f"{grupo}/0.png"]
+                Image.new("RGBA", (info["ancho"], info["alto"])).save(self.carpeta / grupo / "transparente.png")
+        # Y en am/pm, una casilla «blank» para cuando el reloj está en formato de 24 horas.
+        if "hora/am.png" in guia:
+            ancho = max(guia["hora/am.png"]["ancho"], guia["hora/pm.png"]["ancho"])
+            alto = max(guia["hora/am.png"]["alto"], guia["hora/pm.png"]["alto"])
+            Image.new("RGBA", (ancho, alto)).save(self.carpeta / "hora" / "ampm-vacio.png")
         return guia
 
 
@@ -137,7 +152,7 @@ def caratula(p):
         lote.agregar(f"bateria/icono-{nivel:03d}.png", g.icono_bateria(p, nivel))
     for i, dia in enumerate(DIAS, 1):
         lote.agregar(f"dias/{i}-{dia.lower()}.png",
-                     texto(dia, p["fuente_dia"], 400, 14, 3.5, .9, tinta))
+                     texto(dia, p["fuente_dia"], 400, 14, 3.5, .9, tinta), "grupo:dias")
 
     piezas = lote.exportar()
     shutil.copy(g.SALIDA / f"{p['clave']}.png", carpeta / "vista-previa.png")
@@ -157,7 +172,7 @@ def aod():
     lote.agregar("manecillas/centro.png", g.aod_centro())
     textos_dinamicos(lote, AOD_TEXTOS, g.AOD_GRIS)
     for i, dia in enumerate(DIAS, 1):
-        lote.agregar(f"dias/{i}-{dia.lower()}.png", texto(dia, "Avenir Next", 500, 15, 1.5, 1, g.AOD_GRIS))
+        lote.agregar(f"dias/{i}-{dia.lower()}.png", texto(dia, "Avenir Next", 500, 15, 1.5, 1, g.AOD_GRIS, "start"), "izq:dias")
 
     piezas = lote.exportar()
     shutil.copy(g.SALIDA / "00-aod.png", carpeta / "vista-previa.png")
@@ -167,11 +182,14 @@ def aod():
                           posicion=dict(x=C, y=C)))
 
 
-def main():
-    if SALIDA.exists():
-        shutil.rmtree(SALIDA)
+def main(claves):
+    """Exporta todas las carátulas, o sólo las claves indicadas (p. ej. `00-aod 04-vino`)."""
     trabajos = [(p["clave"], lambda p=p: caratula(p)) for p in g.ESTILOS] + [("00-aod", aod)]
     for clave, trabajo in trabajos:
+        if claves and clave not in claves:
+            continue
+        for sub in ("manecillas", "hora", "fecha", "bateria", "dias"):  # Las portadas se conservan.
+            shutil.rmtree(SALIDA / clave / sub, ignore_errors=True)
         guia = trabajo()
         (SALIDA / clave / "guia.json").write_text(json.dumps(guia, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"{clave}: {len(guia['piezas'])} piezas")
@@ -179,4 +197,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
