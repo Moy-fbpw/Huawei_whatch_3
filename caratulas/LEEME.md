@@ -8,6 +8,8 @@ Ocho carátulas analógicas (466×466) y un AOD común, listas para armarse en H
 |---|---|---|
 | `generar.py` | Dibuja las carátulas en SVG y la hoja de vista previa (`vista-previa/hoja.png`) | `python3 generar.py` |
 | `piezas.py` | Exporta las piezas sueltas a `piezas/<carátula>/` con su `guia.json` | `.venv/bin/python piezas.py` |
+| `portadas.py` | Genera las imágenes que pide Theme Studio al exportar (res, cover, icon, aod) | `.venv/bin/python portadas.py` |
+| `empaquetar.py` | Convierte el `.hwt` de Theme Studio en uno instalable en el reloj (`hwt/reloj/`) | `python3 empaquetar.py hwt/<carátula>.hwt` |
 
 Requisitos: macOS con Google Chrome (convierte SVG a PNG) y Pillow para recortar:
 
@@ -43,3 +45,13 @@ Medido sobre la vista previa: 2.4 % de pixeles no negros. Huawei pide como máxi
 ## Orden de capas
 
 Fondo → datos (fecha, día, batería, hora digital) → manecillas → tapa central.
+
+## Instalar en el reloj
+
+1. Exportar el `.hwt` en Theme Studio a `hwt/`.
+2. `python3 empaquetar.py hwt/<carátula>.hwt`: quita el `watchface.bin` que agrega Theme Studio 11.
+   El Watch 3 (HarmonyOS 3.0) acepta la carátula con él, pero la descarta sin avisar.
+3. Copiar `hwt/reloj/<carátula>.hwt` al celular y abrirlo con Gadgetbridge (*Instalador de FW/App*).
+
+Gadgetbridge debe estar emparejado con el ID de cuenta Huawei puesto **antes** de emparejar
+(ajustes del reloj → *Cuenta de Huawei*); si no, el reloj detecta otra cuenta y ofrece restablecerse.
