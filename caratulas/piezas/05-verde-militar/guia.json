@@ -32,63 +32,63 @@
       "alto": 14
     },
     "hora/0.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "hora/1.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "hora/2.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "hora/3.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "hora/4.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "hora/5.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "hora/6.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "hora/7.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "hora/8.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "hora/9.png": {
-      "x": 229,
-      "y": 226,
-      "ancho": 8,
+      "x": 228,
+      "y": 227,
+      "ancho": 10,
       "alto": 12
     },
     "fecha/0.png": {
@@ -152,68 +152,68 @@
       "alto": 12
     },
     "bateria/0.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "bateria/1.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "bateria/2.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "bateria/3.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "bateria/4.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "bateria/5.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "bateria/6.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "bateria/7.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "bateria/8.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "bateria/9.png": {
-      "x": 230,
-      "y": 228,
-      "ancho": 6,
-      "alto": 10
+      "x": 229,
+      "y": 227,
+      "ancho": 8,
+      "alto": 11
     },
     "hora/dos-puntos.png": {
       "x": 231,
-      "y": 226,
+      "y": 227,
       "ancho": 3,
       "alto": 12
     },
@@ -225,86 +225,86 @@
     },
     "hora/am.png": {
       "x": 223,
-      "y": 230,
+      "y": 231,
       "ancho": 19,
       "alto": 8
     },
     "hora/pm.png": {
-      "x": 223,
-      "y": 230,
-      "ancho": 19,
+      "x": 222,
+      "y": 231,
+      "ancho": 21,
       "alto": 11
     },
     "bateria/porcentaje.png": {
       "x": 228,
-      "y": 228,
+      "y": 227,
       "ancho": 10,
-      "alto": 10
+      "alto": 11
     },
     "bateria/icono-000.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-010.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-020.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-030.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-040.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-050.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-060.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-070.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-080.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-090.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "bateria/icono-100.png": {
-      "x": 210,
+      "x": 204,
       "y": 329,
-      "ancho": 17,
+      "ancho": 20,
       "alto": 9
     },
     "dias/1-lunes.png": {
@@ -355,7 +355,7 @@
       "centro_x": 233.0,
       "centro_y": 313.5,
       "fuente": "Avenir Next",
-      "tamaño": 13
+      "tamaño": 14
     },
     "fecha": {
       "centro_x": 399.0,
@@ -364,10 +364,10 @@
       "tamaño": 13
     },
     "bateria": {
-      "centro_x": 243.0,
+      "centro_x": 245.0,
       "centro_y": 333,
       "fuente": "Avenir Next",
-      "tamaño": 11
+      "tamaño": 12
     }
   },
   "giro": {

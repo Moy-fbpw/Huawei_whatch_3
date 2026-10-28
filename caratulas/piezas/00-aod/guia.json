@@ -27,63 +27,63 @@
     },
     "hora/0.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "hora/1.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "hora/2.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "hora/3.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "hora/4.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "hora/5.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "hora/6.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "hora/7.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "hora/8.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "hora/9.png": {
       "x": 228,
-      "y": 226,
+      "y": 225,
       "ancho": 10,
-      "alto": 13
+      "alto": 14
     },
     "fecha/0.png": {
       "x": 228,
@@ -147,9 +147,9 @@
     },
     "hora/dos-puntos.png": {
       "x": 231,
-      "y": 226,
+      "y": 225,
       "ancho": 3,
-      "alto": 13
+      "alto": 14
     },
     "fecha/guion.png": {
       "x": 226,
@@ -205,7 +205,7 @@
       "centro_x": 233.0,
       "centro_y": 317,
       "fuente": "Avenir Next",
-      "tamaño": 15
+      "tamaño": 16
     },
     "fecha": {
       "centro_x": 233.0,

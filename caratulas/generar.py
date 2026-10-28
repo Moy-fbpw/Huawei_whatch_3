@@ -241,7 +241,7 @@ def marco_fecha(p):
 </g>"""
 
 
-def icono_bateria(p, bateria, x=C - 22, y=330):
+def icono_bateria(p, bateria, x=C - 25, y=330):
     tinta = p["tinta"]
     nivel = 11 * bateria / 100
     return f"""<g transform="translate({x} {y})" opacity=".75">
@@ -262,10 +262,10 @@ def capa_datos(p, dia, fecha, h, m, bateria):
 {marco_fecha(p)}
 <text x="{C + 166}" y="{C + 1}" font-family="Avenir Next" font-weight="500" font-size="13" text-anchor="middle"
       dominant-baseline="central" fill="{tinta}">{fecha}</text>
-<text x="{C}" y="318" font-family="Avenir Next" font-weight="500" font-size="13" letter-spacing=".5"
+<text x="{C}" y="318" font-family="Avenir Next" font-weight="500" font-size="14" letter-spacing=".5"
       text-anchor="middle" fill="{tinta}" opacity=".8">{h12}:{m:02d} {sufijo}</text>
 {icono_bateria(p, bateria)}
-<text x="{C + 10}" y="337" font-family="Avenir Next" font-weight="500" font-size="11" text-anchor="middle"
+<text x="{C + 12}" y="337" font-family="Avenir Next" font-weight="500" font-size="12" text-anchor="middle"
       fill="{tinta}" opacity=".75">{bateria}%</text>"""
 
 
@@ -398,7 +398,7 @@ def aod():
     partes = [aod_fondo(),
               f'<text x="{C}" y="152" font-family="Avenir Next" font-weight="500" font-size="15" '
               f'letter-spacing="1.5" text-anchor="middle" fill="{AOD_GRIS}">{t["fecha"]}   {t["dia"]}</text>',
-              f'<text x="{C}" y="322" font-family="Avenir Next" font-weight="500" font-size="15" '
+              f'<text x="{C}" y="322" font-family="Avenir Next" font-weight="500" font-size="16" '
               f'letter-spacing="1" text-anchor="middle" fill="{AOD_GRIS}">{t["h"]}:{t["m"]:02d}</text>',
               aod_manecilla(118, 12, (t["h"] % 12 + t["m"] / 60) * 30),
               aod_manecilla(200, 9, t["m"] * 6),

@@ -122,14 +122,14 @@
 </g>
 <text x="399.0" y="234.0" font-family="Avenir Next" font-weight="500" font-size="13" text-anchor="middle"
       dominant-baseline="central" fill="#1b1c1e">26 - 10</text>
-<text x="233.0" y="318" font-family="Avenir Next" font-weight="500" font-size="13" letter-spacing=".5"
+<text x="233.0" y="318" font-family="Avenir Next" font-weight="500" font-size="14" letter-spacing=".5"
       text-anchor="middle" fill="#1b1c1e" opacity=".8">10:08 am</text>
-<g transform="translate(211.0 330)" opacity=".75">
+<g transform="translate(208.0 330)" opacity=".75">
   <rect x="0" y="0" width="14" height="7" rx="1.3" fill="none" stroke="#1b1c1e" stroke-width=".9"/>
   <rect x="14.3" y="2" width="1.4" height="3" fill="#1b1c1e"/>
   <rect x="1.5" y="1.5" width="6.6" height="4" fill="#1b1c1e"/>
 </g>
-<text x="243.0" y="337" font-family="Avenir Next" font-weight="500" font-size="11" text-anchor="middle"
+<text x="245.0" y="337" font-family="Avenir Next" font-weight="500" font-size="12" text-anchor="middle"
       fill="#1b1c1e" opacity=".75">60%</text>
 <g transform="rotate(304.00 233.0 233.0)" filter="url(#sombra)"><path d="M233.00,115.00 L227.00,209.40 L229.70,233.00 L231.20,251.00 L233.00,251.00 Z" fill="url(#metalOscuro)" stroke="#08090b" stroke-width=".5"/><path d="M233.00,115.00 L239.00,209.40 L236.30,233.00 L234.80,251.00 L233.00,251.00 Z" fill="url(#metalClaro)" stroke="#08090b" stroke-width=".5"/></g>
 <g transform="rotate(51.60 233.0 233.0)" filter="url(#sombra)"><path d="M233.00,33.00 L228.50,193.00 L230.53,233.00 L231.65,255.00 L233.00,255.00 Z" fill="url(#metalOscuro)" stroke="#08090b" stroke-width=".5"/><path d="M233.00,33.00 L237.50,193.00 L235.47,233.00 L234.35,255.00 L233.00,255.00 Z" fill="url(#metalClaro)" stroke="#08090b" stroke-width=".5"/></g>

@@ -26,12 +26,12 @@ DIAS = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMING
 # Textos dinámicos: (fuente, peso, tamaño, espaciado, opacidad, centro x, centro y).
 # Los centros coinciden con la vista previa de generar.py.
 TEXTOS = {
-    "hora": ("Avenir Next", 500, 13, .5, .8, C, 313.5),
+    "hora": ("Avenir Next", 500, 14, .5, .8, C, 313.5),
     "fecha": ("Avenir Next", 500, 13, 0, 1, C + 166, C + 1),
-    "bateria": ("Avenir Next", 500, 11, 0, .75, C + 10, 333),
+    "bateria": ("Avenir Next", 500, 12, 0, .75, C + 12, 333),
 }
 AOD_TEXTOS = {
-    "hora": ("Avenir Next", 500, 15, 1, 1, C, 317),
+    "hora": ("Avenir Next", 500, 16, 1, 1, C, 317),
     "fecha": ("Avenir Next", 500, 15, 1.5, 1, C, 147),
 }
 
@@ -72,7 +72,7 @@ class Lote:
             if recorte.startswith(("grupo:", "izq:")):
                 caja = im.getbbox()
                 if caja:
-                    a = cajas.setdefault(recorte, [C, C, C, C])
+                    a = cajas.setdefault(recorte, list(caja))
                     a[0], a[1] = min(a[0], caja[0]), min(a[1], caja[1])
                     a[2], a[3] = max(a[2], caja[2]), max(a[3], caja[3])
 
@@ -146,10 +146,13 @@ def caratula(p):
 
     textos_dinamicos(lote, TEXTOS, tinta)
     for sufijo in ("am", "pm"):
-        lote.agregar(f"hora/{sufijo}.png", texto(sufijo, "Avenir Next", 500, 13, .5, .8, tinta))
-    lote.agregar("bateria/porcentaje.png", texto("%", "Avenir Next", 500, 11, 0, .75, tinta), "sep:bateria")
+        lote.agregar(f"hora/{sufijo}.png", texto(sufijo, "Avenir Next", 500, 14, .5, .8, tinta))
+    lote.agregar("bateria/porcentaje.png", texto("%", "Avenir Next", 500, 12, 0, .75, tinta), "sep:bateria")
+    # Con «100%» el número crece hacia la izquierda: ese ícono se recorre para no pegarse.
+    # Todos comparten la misma caja para que el reloj los dibuje en una sola posición.
     for nivel in range(0, 101, 10):
-        lote.agregar(f"bateria/icono-{nivel:03d}.png", g.icono_bateria(p, nivel))
+        x = C - 25 - (3 if nivel == 100 else 0)
+        lote.agregar(f"bateria/icono-{nivel:03d}.png", g.icono_bateria(p, nivel, x=x), "izq:bateria-icono")
     for i, dia in enumerate(DIAS, 1):
         lote.agregar(f"dias/{i}-{dia.lower()}.png",
                      texto(dia, p["fuente_dia"], 400, 14, 3.5, .9, tinta), "grupo:dias")
