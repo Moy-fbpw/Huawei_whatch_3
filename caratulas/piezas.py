@@ -20,27 +20,23 @@ import generar as g
 
 C = g.C
 SALIDA = g.RAIZ / "piezas"
+HALO = g.halo(dict(halo=True))  # Atributo de filtro que agrega g.halo() a los textos.
 SOMBRA_PIEZA = (0, 0)  # Centrada: en Theme Studio la sombra gira junto con la manecilla.
 DIAS = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO"]
 
-# Textos dinámicos: (fuente, peso, tamaño, espaciado, opacidad, centro x, centro y).
-# Los centros coinciden con la vista previa de generar.py.
-TEXTOS = {
-    "hora": ("Avenir Next", 500, 14, .5, .8, C, 313.5),
-    "fecha": ("Avenir Next", 500, 13, 0, 1, C + 166, C + 1),
-    "bateria": ("Avenir Next", 500, 12, 0, .75, C + 12, 333),
-}
-AOD_TEXTOS = {
-    "hora": ("Avenir Next", 500, 16, 1, 1, C, 317),
-    "fecha": ("Avenir Next", 500, 15, 1.5, 1, C, 147),
-}
+# Textos dinámicos: (fuente, peso, tamaño, espaciado, opacidad, centro x, centro y), definidos en generar.py.
+TEXTOS = g.TEXTOS
+AOD_TEXTOS = g.AOD_TEXTOS
 
 
-def texto(car, fuente, peso, tam, espaciado, opacidad, color, ancla="middle"):
-    """Un carácter o palabra en el centro del lienzo (centrado, o empezando ahí con ancla="start")."""
-    return (f'<text x="{C}" y="{C}" font-family="{fuente}" font-weight="{peso}" font-size="{tam}" '
+def texto(car, fuente, peso, tam, espaciado, opacidad, color, ancla="middle", dy=0, filtro=""):
+    """Un carácter o palabra en el centro del lienzo (centrado, o empezando ahí con ancla="start").
+
+    `dy` baja la pieza; su posición queda en `guia.json` y hwt.py la respeta.
+    """
+    return (f'<text x="{C}" y="{C + dy:g}" font-family="{fuente}" font-weight="{peso}" font-size="{tam}" '
             f'letter-spacing="{espaciado}" text-anchor="{ancla}" dominant-baseline="central" '
-            f'fill="{color}" opacity="{opacidad}">{car}</text>')
+            f'fill="{color}" opacity="{opacidad}"{filtro}>{car}</text>')
 
 
 class Lote:
@@ -48,43 +44,58 @@ class Lote:
 
     def __init__(self, carpeta, p):
         self.carpeta, self.p = carpeta, p
-        self.piezas = []  # (ruta relativa, svg, modo de recorte)
+        self.piezas = []  # (ruta relativa, svg, modo de recorte, svg sin halo o None)
 
     def agregar(self, ruta, cuerpo, recorte="auto"):
-        self.piezas.append((ruta, g.svg(cuerpo, self.p, SOMBRA_PIEZA), recorte))
+        # Con halo, el ancho se mide sin él: si no, cada dígito trae aire de más y la hora sale espaciada.
+        sin_halo = cuerpo.replace(HALO, "") if HALO in cuerpo else None
+        self.piezas.append((ruta, g.svg(cuerpo, self.p, SOMBRA_PIEZA), recorte,
+                            sin_halo and g.svg(sin_halo, self.p, SOMBRA_PIEZA)))
 
     def exportar(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmp = Path(tmp)
 
-            def convertir(i):
-                ruta_svg = tmp / f"{i}.svg"
-                ruta_svg.write_text(self.piezas[i][1], encoding="utf-8")
-                g.a_png(ruta_svg, tmp / f"{i}.png")
-                return Image.open(tmp / f"{i}.png").convert("RGBA")
+            def convertir(trabajo):
+                nombre, svg = trabajo
+                ruta_svg = tmp / f"{nombre}.svg"
+                ruta_svg.write_text(svg, encoding="utf-8")
+                g.a_png(ruta_svg, tmp / f"{nombre}.png")
+                return Image.open(tmp / f"{nombre}.png").convert("RGBA")
 
+            trabajos = [(str(i), pieza[1]) for i, pieza in enumerate(self.piezas)]
+            trabajos += [(f"m{i}", pieza[3]) for i, pieza in enumerate(self.piezas) if pieza[3]]
             with ThreadPoolExecutor(max_workers=8) as hilos:
-                imagenes = list(hilos.map(convertir, range(len(self.piezas))))
+                hechas = dict(zip((n for n, _ in trabajos), hilos.map(convertir, trabajos)))
+        imagenes = [hechas[str(i)] for i in range(len(self.piezas))]
+
+        def bbox(i):
+            """Caja visible; con halo, el ancho sale del texto sin halo y el alto del texto con halo."""
+            real = imagenes[i].getbbox()
+            if not self.piezas[i][3] or not real:
+                return real
+            medida = hechas[f"m{i}"].getbbox()
+            return (medida[0], real[1], medida[2], real[3])
 
         cajas = {}
         # Los grupos (dígitos de un mismo tipo) comparten tamaño para alinearse en Theme Studio.
-        for (ruta, _, recorte), im in zip(self.piezas, imagenes):
+        for i, (ruta, _, recorte, _) in enumerate(self.piezas):
             if recorte.startswith(("grupo:", "izq:")):
-                caja = im.getbbox()
+                caja = bbox(i)
                 if caja:
                     a = cajas.setdefault(recorte, list(caja))
                     a[0], a[1] = min(a[0], caja[0]), min(a[1], caja[1])
                     a[2], a[3] = max(a[2], caja[2]), max(a[3], caja[3])
 
         guia = {}
-        for (ruta, _, recorte), im in zip(self.piezas, imagenes):
+        for i, ((ruta, _, recorte, _), im) in enumerate(zip(self.piezas, imagenes)):
             if recorte == "completo":
                 caja = (0, 0, g.TAM, g.TAM)
             elif recorte.startswith("sep:"):
                 # "sep:<grupo>[:aire]": ancho propio, altura del grupo y aire opcional a los lados.
                 _, nombre, *aire = recorte.split(":")
                 aire = int(aire[0]) if aire else 0
-                propia, grupo = im.getbbox(), cajas["grupo:" + nombre]
+                propia, grupo = bbox(i), cajas["grupo:" + nombre]
                 caja = (propia[0] - aire, grupo[1], propia[2] + aire, grupo[3])
             elif recorte.startswith("izq:"):
                 # Grupo alineado a la izquierda: misma caja para todos, sin centrar.
@@ -94,7 +105,7 @@ class Lote:
                 medio = max(C - x0, x1 - C)  # Simétrico respecto al centro para no descuadrar.
                 caja = (int(C - medio), y0, int(C + medio + .5), y1)
             else:
-                caja = im.getbbox()
+                caja = bbox(i)
             destino = self.carpeta / ruta
             destino.parent.mkdir(parents=True, exist_ok=True)
             im.crop(caja).save(destino)
@@ -118,15 +129,23 @@ def pivote(info):
     return dict(x=round(C - info["x"], 1), y=round(C - info["y"], 1))
 
 
-def textos_dinamicos(lote, tabla, color, prefijo=""):
+def textos_dinamicos(lote, tabla, color, prefijo="", color_fecha=None, filtro=""):
+    """Dígitos y separadores; la fecha puede llevar su propia tinta y va sin halo (está en su ventana)."""
+    def estilo(clave):
+        if clave == "fecha":
+            return dict(color=color_fecha or color)
+        return dict(color=color, filtro=filtro)
+
     for clave, (fuente, peso, tam, esp, op, _, _) in tabla.items():
         for d in range(10):
-            lote.agregar(f"{prefijo}{clave}/{d}.png", texto(d, fuente, peso, tam, esp, op, color), f"grupo:{clave}")
+            lote.agregar(f"{prefijo}{clave}/{d}.png", texto(d, fuente, peso, tam, esp, op, **estilo(clave)),
+                         f"grupo:{clave}")
     fuente, peso, tam, esp, op, _, _ = tabla["hora"]
-    lote.agregar(f"{prefijo}hora/dos-puntos.png", texto(":", fuente, peso, tam, esp, op, color), "sep:hora")
+    lote.agregar(f"{prefijo}hora/dos-puntos.png", texto(":", fuente, peso, tam, esp, op, **estilo("hora")), "sep:hora")
     if "fecha" in tabla:
         fuente, peso, tam, esp, op, _, _ = tabla["fecha"]
-        lote.agregar(f"{prefijo}fecha/guion.png", texto("-", fuente, peso, tam, esp, op, color), "sep:fecha:4")
+        lote.agregar(f"{prefijo}fecha/guion.png", texto("-", fuente, peso, tam, esp, op, **estilo("fecha")),
+                     "sep:fecha:4")
 
 
 def ubicaciones(tabla):
@@ -144,18 +163,21 @@ def caratula(p):
     lote.agregar("manecillas/segundo.png", g.segundero(p, 0))
     lote.agregar("manecillas/centro.png", g.centro(p))
 
-    textos_dinamicos(lote, TEXTOS, tinta)
+    filtro = g.halo(p)
+    textos_dinamicos(lote, TEXTOS, tinta, color_fecha=p.get("tinta_fecha"), filtro=filtro)
+    # am/pm más chico que los dígitos: se baja para que ambos compartan la línea base.
+    baja = g.BASE * (TEXTOS["hora"][2] - g.AMPM[2])
     for sufijo in ("am", "pm"):
-        lote.agregar(f"hora/{sufijo}.png", texto(sufijo, "Avenir Next", 500, 14, .5, .8, tinta))
-    lote.agregar("bateria/porcentaje.png", texto("%", "Avenir Next", 500, 12, 0, .75, tinta), "sep:bateria")
+        lote.agregar(f"hora/{sufijo}.png", texto(sufijo, *g.AMPM, tinta, dy=baja, filtro=filtro))
+    lote.agregar("bateria/porcentaje.png", texto("%", *TEXTOS["bateria"][:5], tinta, filtro=filtro), "sep:bateria")
     # Con «100%» el número crece hacia la izquierda: ese ícono se recorre para no pegarse.
     # Todos comparten la misma caja para que el reloj los dibuje en una sola posición.
     for nivel in range(0, 101, 10):
-        x = C - 25 - (3 if nivel == 100 else 0)
+        x = g.ICONO_BATERIA[0] - (3 if nivel == 100 else 0)
         lote.agregar(f"bateria/icono-{nivel:03d}.png", g.icono_bateria(p, nivel, x=x), "izq:bateria-icono")
     for i, dia in enumerate(DIAS, 1):
         lote.agregar(f"dias/{i}-{dia.lower()}.png",
-                     texto(dia, p["fuente_dia"], 400, 14, 3.5, .9, tinta), "grupo:dias")
+                     texto(dia, p["fuente_dia"], 400, 14, 3.5, .9, tinta, filtro=filtro), "grupo:dias")
 
     piezas = lote.exportar()
     shutil.copy(g.SALIDA / f"{p['clave']}.png", carpeta / "vista-previa.png")

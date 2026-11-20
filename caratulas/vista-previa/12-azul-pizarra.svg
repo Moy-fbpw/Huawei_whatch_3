@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="466" height="466" viewBox="0 0 466 466">
+<defs>
+  <clipPath id="esfera"><circle cx="233.0" cy="233.0" r="233.0"/></clipPath>
+  <radialGradient id="fondo" cx="50%" cy="44%" r="60%">
+    <stop offset="0" stop-color="#83a0b0"/><stop offset="1" stop-color="#4c6878"/>
+  </radialGradient>
+  <radialGradient id="fume" cx="50%" cy="48%" r="50%">
+    <stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.7"/>
+  </radialGradient>
+  <filter id="halo" x="-30%" y="-60%" width="160%" height="220%">
+    <feDropShadow dx="0" dy="0" stdDeviation="1.1" flood-color="#22323c" flood-opacity=".6"/>
+  </filter>
+  <linearGradient id="metalV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff4dc"/><stop offset=".55" stop-color="#d6b98a"/><stop offset="1" stop-color="#7e6238"/>
+  </linearGradient>
+  <linearGradient id="metalClaro" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d6b98a"/><stop offset="1" stop-color="#fff4dc"/>
+  </linearGradient>
+  <linearGradient id="metalOscuro" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#7e6238"/><stop offset="1" stop-color="#d6b98a"/>
+  </linearGradient>
+  <linearGradient id="franja" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".07"/>
+    <stop offset="1" stop-color="#000" stop-opacity=".08"/>
+  </linearGradient>
+  <filter id="grano" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="7"/>
+    <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .22 0"/>
+  </filter>
+  <filter id="sombra" x="-50%" y="-50%" width="200%" height="200%">
+    <feDropShadow dx="1.5" dy="2.5" stdDeviation="1.6" flood-color="#000" flood-opacity=".38"/>
+  </filter>
+</defs>
+<circle cx="233.0" cy="233.0" r="233.0" fill="url(#fondo)"/>
+<g clip-path="url(#esfera)"></g>
+<line x1="233.00" y1="30.00" x2="233.00" y2="23.00" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="233.00" y="12.00" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">60</text>
+<line x1="254.22" y1="31.11" x2="254.95" y2="24.15" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="275.21" y1="34.44" x2="276.66" y2="27.59" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="295.73" y1="39.94" x2="297.89" y2="33.28" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="315.57" y1="47.55" x2="318.41" y2="41.16" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="334.50" y1="57.20" x2="338.00" y2="51.13" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="343.50" y="41.61" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">5</text>
+<line x1="352.32" y1="68.77" x2="356.43" y2="63.11" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="368.83" y1="82.14" x2="373.52" y2="76.94" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="383.86" y1="97.17" x2="389.06" y2="92.48" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="397.23" y1="113.68" x2="402.89" y2="109.57" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="408.80" y1="131.50" x2="414.87" y2="128.00" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="424.39" y="122.50" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">10</text>
+<line x1="418.45" y1="150.43" x2="424.84" y2="147.59" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="426.06" y1="170.27" x2="432.72" y2="168.11" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="431.56" y1="190.79" x2="438.41" y2="189.34" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="434.89" y1="211.78" x2="441.85" y2="211.05" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="436.00" y1="233.00" x2="443.00" y2="233.00" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="454.00" y="233.00" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">15</text>
+<line x1="434.89" y1="254.22" x2="441.85" y2="254.95" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="431.56" y1="275.21" x2="438.41" y2="276.66" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="426.06" y1="295.73" x2="432.72" y2="297.89" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="418.45" y1="315.57" x2="424.84" y2="318.41" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="408.80" y1="334.50" x2="414.87" y2="338.00" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="424.39" y="343.50" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">20</text>
+<line x1="397.23" y1="352.32" x2="402.89" y2="356.43" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="383.86" y1="368.83" x2="389.06" y2="373.52" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="368.83" y1="383.86" x2="373.52" y2="389.06" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="352.32" y1="397.23" x2="356.43" y2="402.89" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="334.50" y1="408.80" x2="338.00" y2="414.87" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="343.50" y="424.39" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">25</text>
+<line x1="315.57" y1="418.45" x2="318.41" y2="424.84" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="295.73" y1="426.06" x2="297.89" y2="432.72" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="275.21" y1="431.56" x2="276.66" y2="438.41" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="254.22" y1="434.89" x2="254.95" y2="441.85" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="233.00" y1="436.00" x2="233.00" y2="443.00" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="233.00" y="454.00" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">30</text>
+<line x1="211.78" y1="434.89" x2="211.05" y2="441.85" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="190.79" y1="431.56" x2="189.34" y2="438.41" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="170.27" y1="426.06" x2="168.11" y2="432.72" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="150.43" y1="418.45" x2="147.59" y2="424.84" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="131.50" y1="408.80" x2="128.00" y2="414.87" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="122.50" y="424.39" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">35</text>
+<line x1="113.68" y1="397.23" x2="109.57" y2="402.89" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="97.17" y1="383.86" x2="92.48" y2="389.06" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="82.14" y1="368.83" x2="76.94" y2="373.52" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="68.77" y1="352.32" x2="63.11" y2="356.43" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="57.20" y1="334.50" x2="51.13" y2="338.00" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="41.61" y="343.50" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">40</text>
+<line x1="47.55" y1="315.57" x2="41.16" y2="318.41" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="39.94" y1="295.73" x2="33.28" y2="297.89" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="34.44" y1="275.21" x2="27.59" y2="276.66" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="31.11" y1="254.22" x2="24.15" y2="254.95" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="30.00" y1="233.00" x2="23.00" y2="233.00" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="12.00" y="233.00" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">45</text>
+<line x1="31.11" y1="211.78" x2="24.15" y2="211.05" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="34.44" y1="190.79" x2="27.59" y2="189.34" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="39.94" y1="170.27" x2="33.28" y2="168.11" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="47.55" y1="150.43" x2="41.16" y2="147.59" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="57.20" y1="131.50" x2="51.13" y2="128.00" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="41.61" y="122.50" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">50</text>
+<line x1="68.77" y1="113.68" x2="63.11" y2="109.57" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="82.14" y1="97.17" x2="76.94" y2="92.48" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="97.17" y1="82.14" x2="92.48" y2="76.94" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="113.68" y1="68.77" x2="109.57" y2="63.11" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="131.50" y1="57.20" x2="128.00" y2="51.13" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+<text x="122.50" y="41.61" font-family="Avenir Next" font-weight="500" font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="#ffffff" opacity=".75">55</text>
+<line x1="150.43" y1="47.55" x2="147.59" y2="41.16" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="170.27" y1="39.94" x2="168.11" y2="33.28" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="190.79" y1="34.44" x2="189.34" y2="27.59" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<line x1="211.78" y1="31.11" x2="211.05" y2="24.15" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+<g transform="rotate(30 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 L230.4,33.0 L231.3,55.0 L233.0,55.0 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".4"/><path d="M233.0,33.0 L235.6,33.0 L234.7,55.0 L233.0,55.0 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".4"/></g>
+<g transform="rotate(60 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 L230.4,33.0 L231.3,55.0 L233.0,55.0 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".4"/><path d="M233.0,33.0 L235.6,33.0 L234.7,55.0 L233.0,55.0 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".4"/></g>
+<g transform="rotate(120 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 L230.4,33.0 L231.3,55.0 L233.0,55.0 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".4"/><path d="M233.0,33.0 L235.6,33.0 L234.7,55.0 L233.0,55.0 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".4"/></g>
+<g transform="rotate(150 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 L230.4,33.0 L231.3,55.0 L233.0,55.0 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".4"/><path d="M233.0,33.0 L235.6,33.0 L234.7,55.0 L233.0,55.0 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".4"/></g>
+<g transform="rotate(210 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 L230.4,33.0 L231.3,55.0 L233.0,55.0 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".4"/><path d="M233.0,33.0 L235.6,33.0 L234.7,55.0 L233.0,55.0 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".4"/></g>
+<g transform="rotate(240 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 L230.4,33.0 L231.3,55.0 L233.0,55.0 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".4"/><path d="M233.0,33.0 L235.6,33.0 L234.7,55.0 L233.0,55.0 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".4"/></g>
+<g transform="rotate(270 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 L230.4,33.0 L231.3,55.0 L233.0,55.0 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".4"/><path d="M233.0,33.0 L235.6,33.0 L234.7,55.0 L233.0,55.0 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".4"/></g>
+<g transform="rotate(300 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 L230.4,33.0 L231.3,55.0 L233.0,55.0 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".4"/><path d="M233.0,33.0 L235.6,33.0 L234.7,55.0 L233.0,55.0 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".4"/></g>
+<g transform="rotate(330 233.0 233.0)" filter="url(#sombra)"><path d="M233.0,33.0 L230.4,33.0 L231.3,55.0 L233.0,55.0 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".4"/><path d="M233.0,33.0 L235.6,33.0 L234.7,55.0 L233.0,55.0 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".4"/></g>
+<text transform="translate(233.00 73.00) scale(1 1)" font-family="Bodoni 72" font-weight="400" font-size="27" text-anchor="middle" dominant-baseline="central" fill="url(#metalV)" stroke="#7e6238" stroke-width=".4" filter="url(#sombra)">XII</text>
+<text transform="translate(233.00 393.00) scale(1 1)" font-family="Bodoni 72" font-weight="400" font-size="27" text-anchor="middle" dominant-baseline="central" fill="url(#metalV)" stroke="#7e6238" stroke-width=".4" filter="url(#sombra)">VI</text>
+
+<text x="233.0" y="132" font-family="Avenir Next" font-size="14" letter-spacing="3.5" text-anchor="middle"
+      fill="#ffffff" opacity=".9" filter="url(#halo)">LUNES</text>
+<g filter="url(#sombra)">
+  <rect x="371.0" y="222.0" width="56" height="22" rx="2.5" fill="#ffffff" fill-opacity="0.75"
+        stroke="url(#metalV)" stroke-width="1.6"/>
+</g>
+<text x="399.0" y="239.2" font-family="Avenir Next" font-weight="500" font-size="13" letter-spacing="0" text-anchor="middle" fill="#22323c" opacity="1">26 - 10</text>
+<text x="233.0" y="319.4" font-family="Avenir Next" font-weight="600" font-size="16" letter-spacing="0.3" text-anchor="middle" fill="#ffffff" opacity="1" filter="url(#halo)">10:08<tspan dx="4" font-family="Avenir Next" font-weight="500" font-size="11" letter-spacing="0.3" fill-opacity="0.75">am</tspan></text>
+<g transform="translate(207.0 333)" opacity=".75" filter="url(#halo)">
+  <rect x="0" y="0" width="14" height="7" rx="1.3" fill="none" stroke="#ffffff" stroke-width=".9"/>
+  <rect x="14.3" y="2" width="1.4" height="3" fill="#ffffff"/>
+  <rect x="1.5" y="1.5" width="6.6" height="4" fill="#ffffff"/>
+</g>
+<text x="245.0" y="341.2" font-family="Avenir Next" font-weight="500" font-size="13" letter-spacing="0" text-anchor="middle" fill="#ffffff" opacity="0.85" filter="url(#halo)">60%</text>
+<g transform="rotate(304.00 233.0 233.0)" filter="url(#sombra)"><path d="M233.00,115.00 L229.00,120.00 L229.00,251.00 L233.00,251.00 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".5"/><path d="M233.00,115.00 L237.00,120.00 L237.00,251.00 L233.00,251.00 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".5"/><line x1="233.0" y1="219.0" x2="233.0" y2="168.10" stroke="#f6f2e8" stroke-width="1.44" stroke-linecap="round"/></g>
+<g transform="rotate(51.60 233.0 233.0)" filter="url(#sombra)"><path d="M233.00,33.00 L230.00,38.00 L230.00,255.00 L233.00,255.00 Z" fill="url(#metalOscuro)" stroke="#7e6238" stroke-width=".5"/><path d="M233.00,33.00 L236.00,38.00 L236.00,255.00 L233.00,255.00 Z" fill="url(#metalClaro)" stroke="#7e6238" stroke-width=".5"/><line x1="233.0" y1="219.0" x2="233.0" y2="123.00" stroke="#f6f2e8" stroke-width="1.08" stroke-linecap="round"/></g>
+<g transform="rotate(216.00 233.0 233.0)" filter="url(#sombra)"><rect x="232.3" y="23.0" width="1.4" height="248" fill="#e3c27e"/></g>
+<circle cx="233.0" cy="233.0" r="6.5" fill="url(#metalV)" stroke="#7e6238" stroke-width=".5"/><circle cx="233.0" cy="233.0" r="2.4" fill="#e3c27e"/>
+</svg>

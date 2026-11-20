@@ -1,7 +1,12 @@
 # Carátulas Huawei Watch 3
 
-Ocho carátulas analógicas (466×466) y un AOD común. `hwt.py` arma los `.hwt` instalables
+Doce carátulas analógicas (466×466) y un AOD común. `hwt.py` arma los `.hwt` instalables
 directo desde las piezas; Theme Studio ya no hace falta.
+
+Tamaños, pesos y posiciones de los textos de datos (hora digital, am/pm, fecha, batería y los del AOD)
+están en `generar.TEXTOS`, `AMPM` y `AOD_TEXTOS`; la vista previa y las piezas los leen de ahí.
+El oro de todas las carátulas es `CHAMPAN`. Una carátula con `halo` rodea sus textos claros con un tono
+oscuro (para fondos claros); `piezas.py` mide el ancho de esas piezas sin el halo.
 
 ## Scripts
 

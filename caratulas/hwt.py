@@ -38,6 +38,10 @@ TITULOS = {
     "06-azul-cielo": ("Rayos de sol", "Rayos"),
     "07-amarillo": ("Ambar", "Ambar"),
     "08-rojo-sangre": ("Cotes de Geneve", "Cotes"),
+    "09-naranja": ("Piloto", "Piloto"),
+    "10-gris-oxford": ("Oxford", "Oxford"),
+    "11-rosa": ("Peonia", "Peonia"),
+    "12-azul-pizarra": ("Pizarra", "Pizarra"),
 }
 
 DIA_Y = 127  # Centro vertical del día; validado en el reloj.

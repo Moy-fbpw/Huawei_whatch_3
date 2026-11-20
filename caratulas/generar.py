@@ -20,17 +20,33 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 # Metales: (claro, medio, oscuro)
 PLATA = ("#ffffff", "#c4c8ce", "#5f646c")
-ORO = ("#fff0c0", "#cfa83c", "#7a5b16")
+# Oro champán (el de Burdeos): el oro de todas las carátulas; el amarillo de fantasía no se usa.
 CHAMPAN = ("#fff4dc", "#d6b98a", "#7e6238")
 LATON = ("#f3e3b8", "#b99a5c", "#5e4c25")
 ACERO_NEGRO = ("#7d858f", "#24282e", "#08090b")
 ACERO_AZUL = ("#b8cde4", "#34557f", "#0f2643")
-ORO_PROFUNDO = ("#f7df96", "#b98a2c", "#4f390c")
 
 # Hora de muestra para la vista previa (la clásica de los catálogos).
 MUESTRA = dict(h=10, m=8, s=36, dia="LUNES", fecha="26 - 10", bateria=60)
 
 TODOS = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12]  # El 3 lo ocupa la ventana de fecha.
+
+# Textos de datos, compartidos por la vista previa y las piezas (piezas.py, hwt.py):
+# (fuente, peso, tamaño, espaciado, opacidad, centro x, centro y).
+# La hora digital es el dato que se lee de reojo: Demi Bold y opacidad completa para que aguante
+# el sol con brillo bajo, pero sigue muy por debajo de los números de la esfera.
+TEXTOS = {
+    "hora": ("Avenir Next", 600, 16, .3, 1, C, 313),
+    "fecha": ("Avenir Next", 500, 13, 0, 1, C + 166, C + 1),
+    "bateria": ("Avenir Next", 500, 13, 0, .85, C + 12, 336),
+}
+AMPM = ("Avenir Next", 500, 11, .3, .75)  # am/pm más chico, sobre la misma línea base de los dígitos.
+AOD_TEXTOS = {
+    "hora": ("Avenir Next", 600, 18, 1, 1, C, 317),
+    "fecha": ("Avenir Next", 500, 15, 1.5, 1, C, 147),
+}
+BASE = .4  # Línea base de Avenir Next medida en Chrome: 0.4 × tamaño debajo del centro del texto.
+ICONO_BATERIA = (C - 26, 333)  # Esquina superior izquierda del ícono de batería.
 
 ESTILOS = [
     # Esmoquin: negro con cepillado circular apenas visible, números en relieve y luminiscencia dorada.
@@ -38,10 +54,10 @@ ESTILOS = [
          tinta="#cfd2d6", metal=PLATA, segundero="#d8d8d8", aguja="fina", lume="#d9b04a",
          numeros=dict(fuente="Avenir Next Condensed", peso=500, tam=31, radio=172, metal=True),
          indices="aplicado", pista="lineas", manecillas="delfina", fuente_dia="Avenir Next"),
-    # Porcelana: esfera blanca de vestir, índices dorados largos, perlas doradas y agujas finas.
+    # Porcelana: esfera blanca de vestir, índices largos y perlas en oro champán y agujas finas.
     dict(clave="02-blanco-dorado", nombre="Blanco y oro · Porcelana", fondo=("#ffffff", "#ece8df"),
-         textura="liso", tinta="#5a4318", metal=ORO_PROFUNDO, segundero="#9c7424", aguja="fina",
-         numeros=dict(fuente="Didot", peso=700, tam=23, radio=170, color="#7a5a18"),
+         textura="liso", tinta="#5b4729", metal=CHAMPAN, segundero="#a3824f", aguja="fina",
+         numeros=dict(fuente="Didot", peso=700, tam=23, radio=170, color="#8a6c42"),
          indices="aplicado", largo_indice=30, pista="perlas", manecillas="aguja", fuente_dia="Didot"),
     # Bauhaus: blanco mate, tipografía geométrica impresa, agujas alfa negras y segundero azul acero.
     dict(clave="03-blanco", nombre="Blanco · Bauhaus", fondo=("#fcfcfc", "#e2e2e2"), textura="liso",
@@ -74,6 +90,32 @@ ESTILOS = [
          textura="cotes", fume=True, tinta="#efe3e3", metal=PLATA, segundero="#e6e6e6", aguja="fina",
          numeros=dict(fuente="Bodoni 72", peso=400, tam=28, radio=170, metal=True),
          indices="aplicado", pista="lineas", manecillas="delfina", fuente_dia="Bodoni 72"),
+    # Piloto: naranja fumé que oscurece hacia una banda marrón, números grandes crema y hojas con lume.
+    # La tinta de los datos es café oscuro: sobre naranja, el blanco no se lee al sol.
+    dict(clave="09-naranja", nombre="Naranja · Piloto", fondo=("#ff8243", "#c24a17"), textura="granulado",
+         tinta="#2b1206", tinta_pista="#f6e9d4", banda="#4a1c0a", metal=PLATA,
+         segundero="#f6e9d4", aguja="flecha", punta="#2f8a55", lume="#f3e6c8",
+         numeros=dict(fuente="Avenir Next", peso=600, tam=34, radio=163, color="#fbf1e2", sombra=True),
+         indices="ninguno", pista="banda", manecillas="hoja", fuente_dia="Avenir Next"),
+    # Oxford: gris oxford con rayos de sol, índices largos facetados, sin números y bastones con lume.
+    dict(clave="10-gris-oxford", nombre="Gris oxford · Oxford", fondo=("#6a6e73", "#26292d"), textura="rayos",
+         rayos_fuerza=.05, tinta="#eceef0", metal=PLATA, segundero="#eceef0", aguja="fina", lume="#e9ecef",
+         numeros=None, indices="aplicado", largo_indice=32, pista="lineas", manecillas="baston",
+         fuente_dia="Avenir Next"),
+    # Peonía: rosa liso con fumé suave (como Burdeos) y anillo de surcos; textos y minutos en plata con un
+    # halo ciruela que los separa del rosa al sol. La fecha conserva la tinta ciruela en su ventana.
+    dict(clave="11-rosa", nombre="Rosa · Peonía", fondo=("#ec9cb1", "#b95873"), textura="liso", fume=.3,
+         anillo=(176, 206), tinta="#f1f2f5", tinta_fecha="#3e1424", halo="#5c1a2e", metal=PLATA,
+         segundero="#f4f4f6",
+         aguja="fina", lume="#ffffff", numeros=None, indices="aplicado", largo_indice=26, pista="lineas",
+         manecillas="baston", fuente_dia="Optima"),
+    # Pizarra: azul pizarra liso y claro, oro champán, romanos XII y VI y minutos numerados en el borde.
+    dict(clave="12-azul-pizarra", nombre="Azul pizarra · Pizarra", fondo=("#83a0b0", "#4c6878"),
+         textura="liso", tinta="#ffffff", tinta_fecha="#22323c", halo="#22323c", metal=CHAMPAN, segundero="#e3c27e",
+         aguja="fina", lume="#f6f2e8", radio_indice=200, largo_indice=22, sin_indice=(12, 3, 6),
+         numeros=dict(fuente="Bodoni 72", peso=400, tam=27, radio=160, metal=True, horas=(12, 6),
+                      etiquetas={12: "XII", 6: "VI"}),
+         indices="aplicado", pista="numerada", manecillas="baston", fuente_dia="Avenir Next"),
 ]
 
 
@@ -86,14 +128,18 @@ def polar(radio, grados):
 def defs(p, sombra=(1.5, 2.5)):
     m1, m2, m3 = p["metal"]
     f1, f2 = p["fondo"]
+    fume = p["fume"] if isinstance(p.get("fume"), float) else .7
     return f"""<defs>
   <clipPath id="esfera"><circle cx="{C}" cy="{C}" r="{C}"/></clipPath>
   <radialGradient id="fondo" cx="50%" cy="44%" r="60%">
     <stop offset="0" stop-color="{f1}"/><stop offset="1" stop-color="{f2}"/>
   </radialGradient>
   <radialGradient id="fume" cx="50%" cy="48%" r="50%">
-    <stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".7"/>
+    <stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="{fume}"/>
   </radialGradient>
+  <filter id="halo" x="-30%" y="-60%" width="160%" height="220%">
+    <feDropShadow dx="0" dy="0" stdDeviation="1.1" flood-color="{p.get("halo", "#000")}" flood-opacity=".6"/>
+  </filter>
   <linearGradient id="metalV" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="{m1}"/><stop offset=".55" stop-color="{m2}"/><stop offset="1" stop-color="{m3}"/>
   </linearGradient>
@@ -144,6 +190,16 @@ def textura(p):
                           f'transform="rotate(-18 {C} {C})"/>')
     elif tipo == "granulado":
         partes.append(f'<rect width="{TAM}" height="{TAM}" filter="url(#grano)"/>')
+    if p.get("anillo"):
+        r_in, r_out = p["anillo"]
+        partes.append(f'<circle cx="{C}" cy="{C}" r="{(r_in + r_out) / 2}" fill="none" stroke="url(#fondo)" '
+                      f'stroke-width="{r_out - r_in}"/>')
+        for i, r in enumerate(range(r_in + 2, r_out, 2)):
+            color = "#ffffff" if i % 2 else "#000000"
+            partes.append(f'<circle cx="{C}" cy="{C}" r="{r}" fill="none" stroke="{color}" '
+                          f'stroke-width="1" opacity=".07"/>')
+        partes.append(f'<circle cx="{C}" cy="{C}" r="{r_in}" fill="none" stroke="#000" stroke-width="1.2" opacity=".22"/>'
+                      f'<circle cx="{C}" cy="{C}" r="{r_in + 1.2}" fill="none" stroke="#fff" stroke-width="1" opacity=".3"/>')
     if p.get("fume"):
         partes.append(f'<circle cx="{C}" cy="{C}" r="{C}" fill="url(#fume)"/>')
     return f'<g clip-path="url(#esfera)">{"".join(partes)}</g>'
@@ -151,8 +207,32 @@ def textura(p):
 
 def pista(p):
     """Minutero exterior."""
-    tinta, tipo = p["tinta"], p["pista"]
+    tinta, tipo = p.get("tinta_pista", p["tinta"]), p["pista"]
     partes = []
+    if tipo == "banda":
+        partes.append(f'<circle cx="{C}" cy="{C}" r="216" fill="none" stroke="{p["banda"]}" stroke-width="34" '
+                      f'clip-path="url(#esfera)"/>'
+                      f'<circle cx="{C}" cy="{C}" r="199" fill="none" stroke="{tinta}" stroke-width=".8" opacity=".5"/>')
+        for i in range(60):
+            hora = i % 5 == 0
+            x1, y1 = polar(206 if hora else 213, i * 6)
+            x2, y2 = polar(225, i * 6)
+            partes.append(f'<line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="{tinta}" '
+                          f'stroke-width="{2.6 if hora else 1.1}" opacity="{.95 if hora else .7}"/>')
+        return "\n".join(partes)
+    if tipo == "numerada":
+        for i in range(60):
+            hora = i % 5 == 0
+            x1, y1 = polar(203, i * 6)
+            x2, y2 = polar(210, i * 6)
+            partes.append(f'<line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="{tinta}" '
+                          f'stroke-width="{1.6 if hora else .9}" opacity="{.85 if hora else .55}"/>')
+            if hora:
+                x, y = polar(221, i * 6)
+                partes.append(f'<text x="{x:.2f}" y="{y:.2f}" font-family="Avenir Next" font-weight="500" '
+                              f'font-size="9.5" text-anchor="middle" dominant-baseline="central" fill="{tinta}" '
+                              f'opacity=".75">{i or 60}</text>')
+        return "\n".join(partes)
     if tipo == "ferrocarril":
         for r in (213, 223):
             partes.append(f'<circle cx="{C}" cy="{C}" r="{r}" fill="none" stroke="{tinta}" '
@@ -188,8 +268,11 @@ def indices(p):
     if tipo == "ninguno":
         return ""
     partes = []
+    radio = p.get("radio_indice", 222)
     for hora in range(1, 13):
         ang = hora * 30
+        if hora in p.get("sin_indice", ()):
+            continue
         if tipo == "trazo":
             x1, y1 = polar(198, ang)
             x2, y2 = polar(214, ang)
@@ -200,7 +283,7 @@ def indices(p):
         largo = base + 4 if hora == 12 else min(base, 20) if hora == 3 else base  # El 3 no toca la fecha.
         for d in ((-4.6, 4.6) if hora == 12 else (0,)):  # Doble índice a las 12.
             ext, inte = 2.6, 1.7  # Más ancho afuera que adentro, como cuña.
-            y0, y1 = C - 222, C - 222 + largo
+            y0, y1 = C - radio, C - radio + largo
             der = f"M{C + d},{y0} L{C + d + ext},{y0} L{C + d + inte},{y1} L{C + d},{y1} Z"
             izq = f"M{C + d},{y0} L{C + d - ext},{y0} L{C + d - inte},{y1} L{C + d},{y1} Z"
             partes.append(
@@ -212,17 +295,21 @@ def indices(p):
 
 
 def numeros(p):
-    n = p["numeros"]
+    n = p.get("numeros")
+    if not n:
+        return ""
     relleno = "url(#metalV)" if n.get("metal") else n.get("color", p["tinta"])
-    borde = f'stroke="{p["metal"][2]}" stroke-width=".4" filter="url(#sombra)"' if n.get("metal") else ""
+    borde = (f'stroke="{p["metal"][2]}" stroke-width=".4" filter="url(#sombra)"' if n.get("metal")
+             else 'filter="url(#sombra)"' if n.get("sombra") else "")
     estiramiento = n.get("ancho", 1)
+    etiquetas = n.get("etiquetas", {})
     partes = []
-    for hora in TODOS:
+    for hora in n.get("horas", TODOS):
         x, y = polar(n["radio"], hora * 30)
         partes.append(
             f'<text transform="translate({x:.2f} {y:.2f}) scale({estiramiento} 1)" '
             f'font-family="{n["fuente"]}" font-weight="{n["peso"]}" font-size="{n["tam"]}" '
-            f'text-anchor="middle" dominant-baseline="central" fill="{relleno}" {borde}>{hora}</text>')
+            f'text-anchor="middle" dominant-baseline="central" fill="{relleno}" {borde}>{etiquetas.get(hora, hora)}</text>')
     return "\n".join(partes)
 
 
@@ -241,10 +328,15 @@ def marco_fecha(p):
 </g>"""
 
 
-def icono_bateria(p, bateria, x=C - 25, y=330):
+def halo(p):
+    """Filtro que rodea los textos claros con un tono oscuro cuando el fondo también es claro."""
+    return ' filter="url(#halo)"' if p.get("halo") else ""
+
+
+def icono_bateria(p, bateria, x=ICONO_BATERIA[0], y=ICONO_BATERIA[1]):
     tinta = p["tinta"]
     nivel = 11 * bateria / 100
-    return f"""<g transform="translate({x} {y})" opacity=".75">
+    return f"""<g transform="translate({x} {y})" opacity=".75"{halo(p)}>
   <rect x="0" y="0" width="14" height="7" rx="1.3" fill="none" stroke="{tinta}" stroke-width=".9"/>
   <rect x="14.3" y="2" width="1.4" height="3" fill="{tinta}"/>
   <rect x="1.5" y="1.5" width="{nivel:.1f}" height="4" fill="{tinta}"/>
@@ -256,17 +348,26 @@ def capa_datos(p, dia, fecha, h, m, bateria):
     tinta = p["tinta"]
     sufijo = "am" if h < 12 else "pm"
     h12 = h % 12 or 12
+    fa, pa, ta, ea, oa = AMPM
+    # El am/pm va en un tspan para compartir la línea base con los dígitos (las piezas hacen lo mismo).
+    ampm = (f'<tspan dx="4" font-family="{fa}" font-weight="{pa}" font-size="{ta}" letter-spacing="{ea}" '
+            f'fill-opacity="{oa}">{sufijo}</tspan>')
     return f"""
 <text x="{C}" y="132" font-family="{p['fuente_dia']}" font-size="14" letter-spacing="3.5" text-anchor="middle"
-      fill="{tinta}" opacity=".9">{dia}</text>
+      fill="{tinta}" opacity=".9"{halo(p)}>{dia}</text>
 {marco_fecha(p)}
-<text x="{C + 166}" y="{C + 1}" font-family="Avenir Next" font-weight="500" font-size="13" text-anchor="middle"
-      dominant-baseline="central" fill="{tinta}">{fecha}</text>
-<text x="{C}" y="318" font-family="Avenir Next" font-weight="500" font-size="14" letter-spacing=".5"
-      text-anchor="middle" fill="{tinta}" opacity=".8">{h12}:{m:02d} {sufijo}</text>
+{dato(TEXTOS["fecha"], fecha, p.get("tinta_fecha", tinta))}
+{dato(TEXTOS["hora"], f"{h12}:{m:02d}", tinta, ampm, halo(p))}
 {icono_bateria(p, bateria)}
-<text x="{C + 12}" y="337" font-family="Avenir Next" font-weight="500" font-size="12" text-anchor="middle"
-      fill="{tinta}" opacity=".75">{bateria}%</text>"""
+{dato(TEXTOS["bateria"], f"{bateria}%", tinta, filtro=halo(p))}"""
+
+
+def dato(spec, contenido, color, extra="", filtro=""):
+    """Texto de datos centrado en su renglón, escrito sobre la línea base como lo dibuja el reloj."""
+    fuente, peso, tam, esp, op, x, y = spec
+    return (f'<text x="{x}" y="{y + BASE * tam:.1f}" font-family="{fuente}" font-weight="{peso}" '
+            f'font-size="{tam}" letter-spacing="{esp}" text-anchor="middle" fill="{color}" '
+            f'opacity="{op}"{filtro}>{contenido}{extra}</text>')
 
 
 def mitades(tipo, largo, ancho, cola):
@@ -313,6 +414,9 @@ def segundero(p, angulo):
     partes = [f'<rect x="{C - .7}" y="{C - 210}" width="1.4" height="{210 + 38}" fill="{color}"/>']
     if tipo == "paleta":
         partes.append(f'<circle cx="{C}" cy="{C - 172}" r="3.6" fill="{color}"/>')
+    elif tipo == "flecha":
+        partes.append(f'<path d="M{C},{C - 214} L{C + 5.5},{C - 196} L{C - 5.5},{C - 196} Z" fill="{p["punta"]}"/>'
+                      f'<rect x="{C - 2.6}" y="{C + 18}" width="5.2" height="20" rx="2.6" fill="{color}"/>')
     elif tipo == "contrapeso":
         partes.append(f'<rect x="{C - 2.6}" y="{C + 18}" width="5.2" height="20" rx="2.6" fill="{color}"/>')
     return (f'<g transform="rotate({angulo:.2f} {C} {C})" filter="url(#sombra)">{"".join(partes)}</g>')
@@ -396,10 +500,8 @@ def aod():
     """
     t = MUESTRA
     partes = [aod_fondo(),
-              f'<text x="{C}" y="152" font-family="Avenir Next" font-weight="500" font-size="15" '
-              f'letter-spacing="1.5" text-anchor="middle" fill="{AOD_GRIS}">{t["fecha"]}   {t["dia"]}</text>',
-              f'<text x="{C}" y="322" font-family="Avenir Next" font-weight="500" font-size="16" '
-              f'letter-spacing="1" text-anchor="middle" fill="{AOD_GRIS}">{t["h"]}:{t["m"]:02d}</text>',
+              dato(AOD_TEXTOS["fecha"], f'{t["fecha"]}   {t["dia"]}', AOD_GRIS),
+              dato(AOD_TEXTOS["hora"], f'{t["h"]}:{t["m"]:02d}', AOD_GRIS),
               aod_manecilla(118, 12, (t["h"] % 12 + t["m"] / 60) * 30),
               aod_manecilla(200, 9, t["m"] * 6),
               aod_centro()]
@@ -446,7 +548,8 @@ def main():
 
     ruta_hoja = SALIDA / "hoja.html"
     ruta_hoja.write_text(hoja(fichas), encoding="utf-8")
-    a_png(ruta_hoja, SALIDA / "hoja.png", ancho=1078, alto=1100)
+    filas = -(-len(fichas) // 3)
+    a_png(ruta_hoja, SALIDA / "hoja.png", ancho=1078, alto=56 + 366 * filas)
     print(f"Listo: {SALIDA}")
 
 
